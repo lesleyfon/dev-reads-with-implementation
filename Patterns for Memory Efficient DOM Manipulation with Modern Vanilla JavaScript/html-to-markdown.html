@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="FmLogo">
+			<p>This is Fm Logo</p>
+		</div>
+
+		<div id="counter">
+			<p>Counter</p>
+		</div>
+
+		<button id="button">Click to clear event properly</button>
+
+		<div id="root" class="mt-2">
+			<div>
+				<button class="target-element">Click me to test event delegation</button>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		// Associate data to DOM nodes with WeakMap
+		let DOMdata = { logo: "Frontend Masters" };
+		let DOMmap = new WeakMap();
+		let el = document.querySelector(".FmLogo");
+		DOMmap.set(el, DOMdata);
+		console.log(DOMmap.get(el)); // { 'logo': 'Frontend Masters' }
+		el.remove(); // DOMdata is able to be garbage collected
+		console.log(DOMmap.get(el)); // { 'logo': 'Frontend Masters' }
+
+		// Clean up after Garbage Collection using WeakRef
+		class Counter {
+			constructor(element) {
+				// Remember a weak reference to the DOM element
+				this.ref = new WeakRef(element);
+				this.start();
+			}
+
+			start() {
+				if (this.timer) {
+					return;
+				}
+
+				this.count = 0;
+
+				const tick = () => {
+					// get the element from the weak reference, if it still exists
+					const element = this.ref.deref();
+					if (element) {
+						console.log("Element is still in memory, updating count.");
+						element.textContent = `Counter: ${++this.count}`;
+					} else {
+						// The element doesn't exist anymore
+						console.log(
+							"Garabage Collector ran and element is GONE – clean up interval"
+						);
+						this.stop();
+						this.ref = null;
+					}
+				};
+
+				tick();
+				this.timer = setInterval(tick, 1000);
+			}
+
+			stop() {
+				if (this.timer) {
+					clearInterval(this.timer);
+					this.timer = 0;
+				}
+			}
+		}
+
+		const element = document.getElementById("counter");
+		const counter = new Counter(element);
+		setTimeout(() => {
+			document.getElementById("counter").remove();
+		}, 5000);
+
+		// 3- Cleaning up Event Listeners
+		function handleClick() {
+			console.log("Button was clicked!");
+			el.removeEventListener("click", handleClick);
+		}
+
+		// 3-a Add an event listener to the button
+		const elBtn = document.querySelector("#button");
+		// elBtn.addEventListener("click", handleClick);
+
+		// 3-b  Use the once param for one and done events
+		elBtn.addEventListener("click", handleClick, {
+			// This param will remove the event listener on the button after being invoked. e.x. Click the button multiple times to confirm that `"Button was clicked!"` is not logged after the first click
+			once: true,
+		});
+
+		// 4 - Use event delegation to bind fewer events
+		function doSomething(event) {
+			console.log(event.currentTarget);
+			console.log(event.target);
+		}
+		const rootEl = document.querySelector("#root");
+		// Listen for clicks on the entire window
+		rootEl.addEventListener("click", function (event) {
+			// if the element is clicked has class "target-element"
+			if (event.target.matches(".target-element")) {
+				doSomething(event);
+			}
+		});
+
+		// 5 - Use AbortController to unbind groups of events
+		const button = document.getElementById("button");
+		let controller = new AbortController();
+		const { signal } = controller;
+
+		// Remove sets of events.
+		button.addEventListener("click", () => console.log("clicked!"), { signal });
+		window.addEventListener("resize", () => console.log("resized!"), { signal });
+		document.addEventListener("keyup", () => console.log("pressed!"), { signal });
+
+		// 5- a - Remove all listeners at once:
+		controller.abort();
+
+		// 6 - Profiling & Debugging - https://web.dev/dom-size-and-interactivity/
+	</script>
+</html>
