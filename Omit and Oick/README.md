@@ -135,3 +135,13 @@ type DistributivePick<T, K extends keyof T> = T extends any
   ? Pick<T, K>
   : never;
 ```
+
+The difference is that it has a different constraint - K extends keyof T - to ensure that the properties you're picking actually exist on the type you're picking from. This matches the behavior of the built-in Pick type.
+
+Summary
+--------
+- Omit and Pick are not distributive, which can lead to unexpected results when used with union types.
+- You can create your own distributive versions of these utility types to ensure they work as expected.
+
+
+Author: Matt Pocock
