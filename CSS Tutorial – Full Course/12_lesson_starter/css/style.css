@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
+section {}
+
+.columns {
+  column-count: 4; /*  Specifies how many columns are in the element*/
+  column-width: 200px; /*  Specifies the width of the column*/
+  column-rule: 3px solid #333; /* Border between columns */
+  column-gap: 3rem; /* Gap between column */
+}
+
+
+.columns p {
+  margin-top: 0px;
+}
+
+.columns h2 {
+  margin-top: 0px;
+  color: white;
+  background-color: #333;
+  padding: 1rem;
+  break-inside: avoid;
+  /* break-before: column; */
+}
+
+.columns p:first-child {
+  background-color: bisque
+}
+
+.columns p:nth-child(2) {
+  background-color: aqua
+}
+
+.quote {
+  font-size: 3rem;
+  text-align: center;
+  color: #333;
+  column-span: all; /* Makes an element take full width of the parent and not a single column */
+
+}
+
+.columns .quote {
+  margin-top: 5rem;
+}
+
+.no-wrap {
+  white-space: nowrap; /*  Prevents text line break*/
+}

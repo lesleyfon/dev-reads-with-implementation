@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: 75px auto;
+  grid-template-areas: 
+  'hd hd hd hd hd hd hd hd hd'
+  'mn mn mn mn mn mn mn sb sb'
+  'ft ft ft ft ft ft ft ft ft'  ;
+  gap: 1rem;
+}
+.el{
+  background-color: rebeccapurple;
+  color: white;
+  display: grid;
+  place-content: center;
+}
+
+.header{
+  grid-area: hd;
+}
+
+.sidebar{
+  grid-area: sb;
+  background-color: blue;
+}
+
+.footer{
+  grid-area: ft;
+}
+
+.main{
+  grid-area: mn;
+
+}
+
+.container{
+  display: grid;
+  min-height: 400px;
+  /* grid-auto-flow: row or column;  */
+  /* grid-template-columns: 200px 100px 200px; */
+  /* grid-template-columns: 2fr 1fr 2fr; 
+  /* fractions uses up all the available space remaining */
+  grid-template-columns: repeat(2, 1fr 2fr);
+  grid-template-rows: minmax(15px, auto);
+  /* row-gap: 2rem;
+  column-gap: 2rem; */
+  gap: 1rem 2rem;
+}
+
+.box {
+  background-color: #000;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+
+.box:first-child{
+  background-color: blue;
+  grid-column-end: 4;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  display: grid;
+  /* align-content: center;
+ justify-content: center; */
+  place-content: center; /* its the combination of align-content: center; justify-content: center; to center a grid child */
+
+}
+
+.box:nth-child(2){
+  background-color: purple;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 4;
+
+}
+.el{}

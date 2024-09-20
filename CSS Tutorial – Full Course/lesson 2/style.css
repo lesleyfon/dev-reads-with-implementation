@@ -1,0 +1,35 @@
+
+html{
+  font-family: monospace ;
+  font-size: 22px;
+}
+body{
+  
+}
+
+button, input, textarea, select {
+  font: inherit
+}
+h1, h2{
+  color:blue
+}
+p {
+  color: aqua;
+}
+
+.gray{
+  color: grey; 
+}
+#second{
+  font-style: italic;
+}
+p span {
+  text-transform: uppercase;
+  background-color: gold;
+}
+
+
+.highlight{
+  text-transform: uppercase;
+  background-color: gold;
+}

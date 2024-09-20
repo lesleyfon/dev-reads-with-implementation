@@ -1,0 +1,29 @@
+/**/
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    border: 2px dashed red;
+    padding: 1.5rem;
+    margin: 1.5rem;
+    font-size: 1.5rem;
+    /* outline: 5px solid purple;
+    outline-offset: -20px; */
+}
+
+
+.circle{
+    width: 100px;
+    height: 100px;
+    background-color: gold;
+    border: solid black;
+    border-radius: 50px;
+    outline: 2px solid red;
+    outline-offset: 20px;
+    margin: 3rem auto;
+
+
+}
