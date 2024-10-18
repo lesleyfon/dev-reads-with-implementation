@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			#board {
+				display: grid;
+				grid-template-columns: repeat(3, 50px);
+				gap: 16px;
+				border: 1px solid gray;
+				padding: 4px;
+				width: 200px;
+			}
+
+			#board > button {
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Tic Tac Toe</h1>
+		<h3 id="game-decs">Its <span id="player-turn"></span> turn</h3>
+		<section id="board"></section>
+		<script src="./dist/tictactoe.js"></script>
+	</body>
+</html>
