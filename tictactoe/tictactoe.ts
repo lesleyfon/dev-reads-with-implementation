@@ -135,6 +135,7 @@ class Game {
 
       button.setAttribute('data-row', `${row}`)
       button.setAttribute('data-col', `${col}`)
+      button.addEventListener('click', (e) => this.play(e)); // Add event listener here
 
       fragment.appendChild(button);
     })
@@ -201,13 +202,3 @@ class Game {
 const gamePlay = new Game()
 
 gamePlay.startGame()
-
-
-
-const allBtnCells = document.querySelectorAll("#board > button.tic-tac-toe-cell");
-
-allBtnCells.forEach(buttonEl => {
-  buttonEl.addEventListener('click', (e) => {
-    gamePlay.play(e)
-  })
-})
